@@ -18,3 +18,11 @@
 #
 
 include_recipe 'tomcat'
+
+remote_file "#{node['tomcat']['webapp_dir']}/youtrack.jar" do
+  source 'http://download.jetbrains.com/charisma/youtrack-4.1.2.jar'
+  mode 0644
+  user node['tomcat']['user']
+  group node['tomcat']['group']
+  notifies :restart, 'service[tomcat]'
+end
