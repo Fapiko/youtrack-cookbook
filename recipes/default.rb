@@ -19,8 +19,13 @@
 
 include_recipe 'tomcat'
 
-remote_file "#{node['tomcat']['webapp_dir']}/youtrack.jar" do
-  source 'http://download.jetbrains.com/charisma/youtrack-4.1.2.jar'
+directory '/usr/share/tomcat6' do
+  owner 'tomcat6'
+  group 'tomcat6'
+end
+
+remote_file "#{node['tomcat']['webapp_dir']}/youtrack.war" do
+  source 'http://download.jetbrains.com/charisma/youtrack-4.1.2.war'
   mode 0644
   user node['tomcat']['user']
   group node['tomcat']['group']
